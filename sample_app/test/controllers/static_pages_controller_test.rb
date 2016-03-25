@@ -29,4 +29,6 @@ class StaticPagesControllerTest < ActionController::TestCase
     assert_select "title", "Contact | #{@base_title}"
   end
 
+
+
 end
