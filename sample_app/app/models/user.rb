@@ -1,8 +1,7 @@
 class User < ActiveRecord::Base
-
   VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-
   attr_accessor :remember_token, :activation_token, :reset_token
+  has_many :microposts,  dependent: :destroy
   before_save   :downcase_email
   before_create :create_activation_digest
   validates :name, presence: true, length: { maximum: 50 }
@@ -10,6 +9,7 @@ class User < ActiveRecord::Base
                     format: { with: VALID_EMAIL_REGEX },
                     uniqueness: { case_sensitive: false }
   validates :password, length: { minimum: 6 }, presence: true,  allow_nil: true
+
   has_secure_password
 
   def User.digest(string)
