@@ -7,6 +7,7 @@ User.create!(name:  "Example User",
              activated_at: Time.zone.now)
 
 99.times do |n|
+  prng = Random.new
   name  = Faker::Name.name
   email = "example-#{n+1}@railstutorial.org"
   password = "password"
@@ -14,6 +15,9 @@ User.create!(name:  "Example User",
                email: email,
                password:              password,
                password_confirmation: password,
-               activated: true,
+               # for a quick visual diff on returning only activated users
+               # Excercise 10.5.2
+               #activated: true,
+               activated: prng.rand(100) > 50,
                activated_at: Time.zone.now)
 end
